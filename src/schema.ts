@@ -42,6 +42,28 @@ export const accounts = sqliteTable(
     }),
   })
 )
+
+export const feeds = sqliteTable('feeds', {
+  id: text('id').primaryKey(),
+  userId: text('userId').notNull().references(() => users.id, { onDelete: "cascade" }),
+  name: text('name').notNull(),
+  description: text('description').notNull(),
+});
+
+export const posts = sqliteTable('posts', {
+  id: integer('id').primaryKey(),
+  feedId: text('feedId').notNull().references(() => feeds.id, { onDelete: "cascade" }),
+  url: text('url').notNull(),
+  type: text('type',{enum:['FACEBOOK','INSTAGRAM','YOUTUBE','TWITTER','TIKTOK','REDDIT', 'TELEGRAM','LINKEDIN']}).notNull(),
+});
+
+export const autosyncFeeds = sqliteTable('autosync', {
+  id: integer('id').primaryKey(),
+  userId: text('userId').notNull().references(() => users.id, { onDelete: "cascade" }),
+  feedId: integer('feedId').notNull().references(() => feeds.id, { onDelete: "cascade" }),
+  url: text('url').notNull(),
+  type: text('type',{enum:['FACEBOOK','INSTAGRAM','YOUTUBE','TWITTER','TIKTOK','REDDIT', 'TELEGRAM','LINKEDIN']}).notNull(),
+});
  
 export const sessions = sqliteTable("session", {
   sessionToken: text("sessionToken").primaryKey(),
