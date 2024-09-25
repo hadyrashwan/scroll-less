@@ -8,7 +8,7 @@ const UrlPostForm = () => {
     e.preventDefault(); // Prevent form reload
 
     try {
-      const response = await fetch('/api/posts/post', {
+      const response = await fetch('/api/posts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

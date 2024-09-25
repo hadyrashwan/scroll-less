@@ -9,7 +9,7 @@ const DisplayFeeds = () => {
   useEffect(() => {
     const fetchFeeds = async () => {
       try {
-        const res = await fetch("/api/feeds/get_user_feeds");
+        const res = await fetch("/api/feeds");
         const data = await res.json();
 
         if (res.ok) {

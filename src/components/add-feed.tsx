@@ -15,7 +15,7 @@ const SaveFeed = () => {
     setSuccess(null);
 
     try {
-      const res = await fetch("/api/feeds/post", {
+      const res = await fetch("/api/feeds", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
