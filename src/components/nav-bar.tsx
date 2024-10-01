@@ -8,7 +8,7 @@ export default async function Navbar() {
   const session = await auth();
 
   return (
-    <nav className="w-full flex items-center justify-between px-1 bg-gray-100 dark:bg-gray-900 shadow-sm rounded">
+    <nav className="w-full flex items-center justify-between px-4 py-2 bg-gray-100 dark:bg-gray-900 shadow-md rounded">
       <div className="flex items-center gap-4">
         <Link href="/">
           <Image
@@ -22,7 +22,7 @@ export default async function Navbar() {
         </Link>
         <ul className="flex gap-6">
           <li>
-            <Link href="/" className="text-sm hover:text-gray-600 dark:hover:text-gray-300">
+            <Link href="/" className="dark:text-gray-300 text-blue-500 hover:underline">
               Explore
             </Link>
           </li>
@@ -30,7 +30,7 @@ export default async function Navbar() {
       </div>
 
       <div className="flex items-center gap-4">
-        <span className="text-sm font-bold text-gray-900 dark:text-gray-200">OwnStream</span>
+        <span className="text-sm font-bold text-gray-900 dark:text-gray-200">Human Scroll</span>
         {session ? (
           <LoggedIn />
         ) : (

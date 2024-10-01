@@ -27,22 +27,25 @@ const DisplayFeeds = () => {
     fetchFeeds();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <div className="text-center mt-4">Loading...</div>;
+  if (error) return <div className="text-center text-red-500 mt-4">Error: {error}</div>;
 
   return (
-    <div>
-      <h2>Your Feeds</h2>
+    <div className="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6 mt-6">
+      <h2 className="text-2xl font-semibold mb-4 text-center ">Your Feeds</h2>
       <ul>
         {feeds.length > 0 ? (
           feeds.map((feed) => (
-            <li key={feed.id}>
-              <h3>{feed.name}</h3>
-              <p>{feed.description}</p>
+            <li key={feed.id} className="border-b border-gray-200 py-4">
+              <h3 className="text-xl font-bold">{feed.name}</h3>
+              <p className="text-gray-700">{feed.description}</p>
+              <p className="text-sm text-gray-500 mt-1">
+                <strong>ID:</strong> {feed.id}
+              </p>
             </li>
           ))
         ) : (
-          <p>No feeds found.</p>
+          <p className="text-center text-gray-600">No feeds found.</p>
         )}
       </ul>
     </div>

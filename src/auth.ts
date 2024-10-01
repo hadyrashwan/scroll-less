@@ -12,4 +12,3 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   })],
   adapter: DrizzleAdapter(db),
 });
-import type { NextAuthOptions } from "next-auth"

@@ -17,7 +17,7 @@ CREATE TABLE `feeds` (
 );
 --> statement-breakpoint
 CREATE TABLE `posts` (
-	`id` integer PRIMARY KEY NOT NULL,
+	`id` text PRIMARY KEY NOT NULL,
 	`feedId` text NOT NULL,
 	`url` text NOT NULL,
 	`type` text NOT NULL,

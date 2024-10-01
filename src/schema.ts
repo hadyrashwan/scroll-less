@@ -51,12 +51,13 @@ export const feeds = sqliteTable('feeds', {
 });
 
 export const posts = sqliteTable('posts', {
-  id: integer('id').primaryKey(),
+  id: text('id').primaryKey(),
   feedId: text('feedId').notNull().references(() => feeds.id, { onDelete: "cascade" }),
   url: text('url').notNull(),
-  type: text('type',{enum:['FACEBOOK','INSTAGRAM','YOUTUBE','TWITTER','TIKTOK','REDDIT', 'TELEGRAM','LINKEDIN']}).notNull(),
+  type: text('type').notNull(),
 });
 
+// {enum:['FACEBOOK','INSTAGRAM','YOUTUBE','TWITTER','TIKTOK','REDDIT', 'TELEGRAM','LINKEDIN']}
 export const autosyncFeeds = sqliteTable('autosync', {
   id: integer('id').primaryKey(),
   userId: text('userId').notNull().references(() => users.id, { onDelete: "cascade" }),
