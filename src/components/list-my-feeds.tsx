@@ -1,8 +1,10 @@
+// /Users/hady/Documents/nextjs_auth/own-content-auth/src/components/list-my-feeds.tsx
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const DisplayFeeds = () => {
-  const [feeds, setFeeds] = useState([]);
+  const [feeds, setFeeds] = useState<{name: string; description: string; id: string}[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -18,7 +20,7 @@ const DisplayFeeds = () => {
           setError(data.error);
         }
       } catch (err) {
-        setError("Failed to fetch feeds.");
+        setError(`Failed to fetch feeds. ${err.message}`);
       } finally {
         setLoading(false);
       }
@@ -37,11 +39,13 @@ const DisplayFeeds = () => {
         {feeds.length > 0 ? (
           feeds.map((feed) => (
             <li key={feed.id} className="border-b border-gray-200 py-4">
-              <h3 className="text-xl font-bold">{feed.name}</h3>
-              <p className="text-gray-700">{feed.description}</p>
-              <p className="text-sm text-gray-500 mt-1">
-                <strong>ID:</strong> {feed.id}
-              </p>
+              <Link href={`/feeds/${feed.id}`} className="block">
+                <h3 className="text-xl font-bold">{feed.name}</h3>
+                <p className="text-gray-700">{feed.description}</p>
+                <p className="text-sm text-gray-500 mt-1">
+                  <strong>ID:</strong> {feed.id}
+                </p>
+              </Link>
             </li>
           ))
         ) : (

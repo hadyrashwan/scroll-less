@@ -15,6 +15,13 @@
       "when": 1727275224340,
       "tag": "0001_glamorous_purifiers",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1727880791719,
+      "tag": "0002_shiny_daimon_hellstrom",
+      "breakpoints": false
     }
   ]
 }

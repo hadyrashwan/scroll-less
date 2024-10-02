@@ -13,21 +13,9 @@ export default async function Home() {
       <Navbar></Navbar>
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert rounded"
-          src="/logos/small-180x38.webp"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        {session ? (
-          <LoggedIn></LoggedIn>
-        ) : (
-          <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-            <SignIn></SignIn>
-          </ol>
-        )}
+
+
+      <h1> This is the explore page to be updated soon.</h1>
 
         <div className="flex gap-4 items-center flex-col sm:flex-row"></div>
       </main>

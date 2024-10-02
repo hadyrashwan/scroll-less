@@ -48,6 +48,7 @@ export const feeds = sqliteTable('feeds', {
   userId: text('userId').notNull().references(() => users.id, { onDelete: "cascade" }),
   name: text('name').notNull(),
   description: text('description').notNull(),
+  created_at: integer('created_at').$defaultFn(() => Date.now()),
 });
 
 export const posts = sqliteTable('posts', {
@@ -55,6 +56,7 @@ export const posts = sqliteTable('posts', {
   feedId: text('feedId').notNull().references(() => feeds.id, { onDelete: "cascade" }),
   url: text('url').notNull(),
   type: text('type').notNull(),
+  created_at: integer('created_at').$defaultFn(() => Date.now()),
 });
 
 // {enum:['FACEBOOK','INSTAGRAM','YOUTUBE','TWITTER','TIKTOK','REDDIT', 'TELEGRAM','LINKEDIN']}

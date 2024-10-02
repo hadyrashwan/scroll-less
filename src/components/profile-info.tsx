@@ -22,7 +22,7 @@ export default async function ProfileInfo() {
                             <span className="font-semibold">Email:</span> {session?.user?.email}
                         </div>
                         <div className="flex items-center">
-                            <span className="font-semibold">Email Verified:</span> {session.user?.emailVerified}
+                            <span className="font-semibold">Email Verified:</span> {session.user?.emailVerified ? "Yes" : "No"}
                         </div>
                         <div className="flex items-center">
                             <span className="font-semibold">Image:</span> {session?.user?.image || "Not provided"}

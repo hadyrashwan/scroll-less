@@ -39,6 +39,7 @@ export const POST = auth( async function GET(req) {
 
       return NextResponse.json({ success: true, body: {feeds: [response]} });
     } catch (error) {
+      console.log(error);
       return NextResponse.json({ error: "Database error" }, { status: 500 });
     }
 
