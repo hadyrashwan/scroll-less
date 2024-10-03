@@ -1,4 +1,3 @@
-import { SignOut } from "@/components/sign-out";
 import { auth } from "@/auth"
 import Navbar from "@/components/nav-bar";
 import AddFeed from "@/components/add-feed";

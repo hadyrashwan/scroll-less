@@ -7,8 +7,6 @@ export const GET = auth(async function GET(req) {
   if (!req.auth)
     return NextResponse.json({ message: "Not authenticated" }, { status: 401 });
 
-  const userId = req.auth?.user?.id || "";
-
   // get path param
   const feedId = req.nextUrl.searchParams.get("feedId") || "";
 
@@ -21,6 +19,7 @@ export const GET = auth(async function GET(req) {
 
     return NextResponse.json({ success: true, body: { feeds: response } });
   } catch (error) {
+    console.log(error);
     return NextResponse.json({ error: "Database error" }, { status: 500 });
   }
 });

@@ -10,7 +10,7 @@ const TelegramWidget = ( { url }) => {
     script.setAttribute('data-telegram-post', url.replace('https://t.me/', ''));
     script.setAttribute('data-width', '100%');
     document.body.appendChild(script);
-  }, []);
+  }, [url]);
 
   return null; // This component doesn't render any UI
 };

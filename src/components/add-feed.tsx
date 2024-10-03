@@ -33,6 +33,7 @@ const SaveFeed = () => {
         setError(data.error || "Something went wrong.");
       }
     } catch (err) {
+      console.log(err)
       setError("Failed to save the feed.");
     } finally {
       setLoading(false);

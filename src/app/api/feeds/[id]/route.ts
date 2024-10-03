@@ -29,6 +29,7 @@ export const GET = auth(async function GET(req, { params }) {
       body: { feed, posts: posts_found },
     });
   } catch (error) {
+    console.log(error);
     return NextResponse.json({ error: "Database error" }, { status: 500 });
   }
 });
