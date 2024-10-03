@@ -4,9 +4,6 @@ import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
 export const GET = auth(async function GET(req, { params }) {
-  if (!req.auth) {
-    return NextResponse.json({ message: "Not authenticated" }, { status: 401 });
-  }
 
   const { id } = params as { id: string};
 
