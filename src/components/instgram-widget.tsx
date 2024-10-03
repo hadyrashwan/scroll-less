@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 
-const InstagramEmbed = ({ url }) => {
+const InstagramEmbed = ({ url }:{ url: string }) => {
   useEffect(() => {
     // Only runs on the client-side after the component mounts
     const script = document.createElement('script');

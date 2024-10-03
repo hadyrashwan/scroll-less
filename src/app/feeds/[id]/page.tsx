@@ -10,7 +10,8 @@ const FeedPage = () => {
   const [feed, setFeed] = useState<{ name: string; description: string } | null>(null);
   const [posts, setPosts] = useState<{ type: string; url: string; id: string }[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null); // Updated the type
+
 
   useEffect(() => {
     const fetchFeed = async () => {
@@ -30,7 +31,11 @@ const FeedPage = () => {
         setFeed(data.body.feed);
         setPosts(data.body.posts);
       } catch (error) {
-        setError(error.message);
+        if (error instanceof Error) {
+          setError(error.message); // Assign the error message as a string
+        } else {
+          setError(String(error)); // Fallback for non-Error objects
+        }
       } finally {
         setLoading(false);
       }

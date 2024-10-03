@@ -6,7 +6,7 @@ import Link from "next/link";
 const DisplayFeeds = () => {
   const [feeds, setFeeds] = useState<{name: string; description: string; id: string}[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchFeeds = async () => {
@@ -19,8 +19,12 @@ const DisplayFeeds = () => {
         } else {
           setError(data.error);
         }
-      } catch (err) {
-        setError(`Failed to fetch feeds. ${err.message}`);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message); // Assign the error message as a string
+        } else {
+          setError(String(error)); // Fallback for non-Error objects
+        }
       } finally {
         setLoading(false);
       }

@@ -3,7 +3,8 @@
 // components/TikTokEmbed.js
 import { useEffect, useState } from 'react';
 
-const TikTokEmbed = ({ url }) => {
+
+const TikTokEmbed = ({ url }:{url:string}) => {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {

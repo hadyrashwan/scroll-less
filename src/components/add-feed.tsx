@@ -4,11 +4,11 @@ import { useState } from "react";
 const SaveFeed = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleSaveFeed = async (e) => {
+  const handleSaveFeed = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError(null);

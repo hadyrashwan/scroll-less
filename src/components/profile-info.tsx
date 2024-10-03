@@ -4,7 +4,6 @@ import { auth } from "@/auth";
 export default async function ProfileInfo() {
     const session = await auth();
 
-
     return session ? (
         <div className=" bg-gray-101">
             <div className="container mx-auto p-4">
@@ -22,7 +21,7 @@ export default async function ProfileInfo() {
                             <span className="font-semibold">Email:</span> {session?.user?.email}
                         </div>
                         <div className="flex items-center">
-                            <span className="font-semibold">Email Verified:</span> {session.user?.emailVerified ? "Yes" : "No"}
+                            {/* <span className="font-semibold">Email Verified:</span> {emailVerified ? "Yes" : "No"} */}
                         </div>
                         <div className="flex items-center">
                             <span className="font-semibold">Image:</span> {session?.user?.image || "Not provided"}

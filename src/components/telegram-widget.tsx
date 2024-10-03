@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 
-const TelegramWidget = ( { url }) => {
+const TelegramWidget = ( { url }: {url:string}) => {
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://telegram.org/js/telegram-widget.js?22';

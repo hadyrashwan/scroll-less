@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
 
-const TwitterEmbed = ({ url }) => {
+const TwitterEmbed = ({ url }:{url:string}) => {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -11,8 +11,8 @@ const TwitterEmbed = ({ url }) => {
   }, []);
 
   // Extract the tweet ID from the URL
-  const getTweetId = (tweetUrl) => {
-    const tweetId = tweetUrl.split('/').pop().split('?')[0];
+  const getTweetId = (tweetUrl:string) => {
+    const tweetId = tweetUrl.split('/').pop()?.split('?')[0] ?? '';
     return tweetId;
   };
 

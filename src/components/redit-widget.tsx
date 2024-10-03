@@ -2,7 +2,7 @@
 "use client"
 import { useEffect, useState } from 'react';
 
-const RedditEmbed = ({ url }) => {
+const RedditEmbed = ({ url }:{url:string}) => {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {

@@ -8,7 +8,12 @@ import TikTokWidget from './tiktok-widget';
 import YoutubeWidget from './video-player';
 import RedditWidget from './redit-widget';
 
-const DynamicWidget = ({ type, url }) => {
+type Widget = {
+  type: string;
+  url: string;
+};
+
+const DynamicWidget = ({ type, url }:Widget) => {
   // Determine which widget to render based on the type
   switch (type) {
     case 'FACEBOOK':

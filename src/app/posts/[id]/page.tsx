@@ -6,9 +6,9 @@ import DynamicWidget from '@/components/dynamic-feed-widget';
 
 const FeedPage = () => {
   const { id } = useParams();
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [posts, setPosts] = useState<{id:string,type:string,url:string}[]>([]);
+  const [loading, setLoading] = useState(true);  
+  const [error, setError] = useState<string | null>(null); // Updated the type
   
   console.log('feed_in');
 
@@ -29,7 +29,11 @@ const FeedPage = () => {
         const data = await response.json();
         setPosts(data.body.posts);
       } catch (error) {
-        setError(error.message);
+        if (error instanceof Error) {
+          setError(error.message); // Assign the error message as a string
+        } else {
+          setError(String(error)); // Fallback for non-Error objects
+        }
       } finally {
         setLoading(false);
       }

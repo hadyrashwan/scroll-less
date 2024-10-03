@@ -24,7 +24,7 @@ const UrlPostForm = () => {
       });
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
 
@@ -49,7 +49,8 @@ const UrlPostForm = () => {
         setMessage(`Error: ${data.error}`);
       }
     } catch (error) {
-      setMessage(`Error: ${error.message}`);
+      const errMessage = (error as Error).message || 'Unknown error';
+      setMessage(`Error: ${errMessage}`);
       isSuccess(false)
     } finally {
       setLoading(false);

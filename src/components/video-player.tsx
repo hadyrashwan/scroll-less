@@ -5,7 +5,7 @@ const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 
 
-const VideoPlayer = ({url}) => {
+const VideoPlayer = ({url}:{url:string}) => {
 // Video path
 const videoSrc = url;
 
