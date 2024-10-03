@@ -16,6 +16,9 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Scroll Less",
   description: "Get you time back",
+  icons: {
+    icon: "/logos/logo.png",
+  },
 };
 
 export default function RootLayout({

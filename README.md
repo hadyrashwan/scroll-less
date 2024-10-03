@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Scroll Less
 
-## Getting Started
+This is a Next.js application that allow users to create there own rss feeds.
 
-First, run the development server:
+### Installation
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Clone the repository:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   ```bash
+   git clone https://github.com/hadyrashwan/scroll-less.git
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. Navigate to the project directory:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   ```bash
+   cd own-content-auth
+   ```
 
-## Learn More
+3. Install the dependencies:
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Set up environment variables:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   Create a `.env` file in the root directory and add the following variables:
 
-## Deploy on Vercel
+   ```env
+    AUTH_SECRET="auth_secret"
+    AUTH_RESEND_KEY=re_token
+    AUTH_FROM_EMAIL_NO_REPLY=no-reply@own-content-mail.techcrafter.online
+    DATABASE_URL="libsql://my-db.turso.io"
+    DATABASE_AUTH_TOKEN=super_long_token
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. Run the development server:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+6. Open your browser and navigate to `http://localhost:3000`.
+
+## Features
+
+- User authentication (sign in, sign out)
+- Create your own feed
+- Add posts to your feed from various sources
+- Expose as RSS feed
+- Auth sync RSS feeds.
+
+## Environment Variables
+
+- `AUTH_SECRET`: Auth secret key
+- `AUTH_RESEND_KEY` : Resend service api key
+- `AUTH_FROM_EMAIL_NO_REPLY`: Email address to send emails from
+- `DATABASE_URL`: Database url
+- `DATABASE_AUTH_TOKEN`: Database auth token
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request if you have any improvements or fixes.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
