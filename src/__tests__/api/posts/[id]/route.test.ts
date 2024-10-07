@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { GET } from '@/app/api/posts/[id]/route'; // Import the GET handler
 import { db } from '@/schema';
 import { vi, describe, it, expect, afterEach } from 'vitest';
-import { NextResponse } from 'next/server'; // Import the NextResponse type
 
 // Mock the Next.js NextResponse object
 vi.mock('next/server', () => ({
@@ -50,7 +50,7 @@ describe('GET /api/posts/[id]', () => {
     const mockPost = [{ id: postId, title: 'Test Post', content: 'This is a test post.' }];
 
     // Mock the database query chain
-    (db.select as typeof vi.fn).mockReturnValueOnce({
+    (db.select as any).mockReturnValueOnce({
       from: vi.fn().mockReturnValue({
         where: vi.fn().mockReturnValue({
           limit: vi.fn().mockResolvedValueOnce(mockPost),
@@ -74,7 +74,7 @@ describe('GET /api/posts/[id]', () => {
     const postId = '1';
 
     // Simulate a database error
-    (db.select as typeof vi.fn).mockReturnValueOnce({
+    (db.select as any).mockReturnValueOnce({
       from: vi.fn().mockReturnValue({
         where: vi.fn().mockReturnValue({
           limit: vi.fn().mockRejectedValueOnce(new Error('Database error')),
