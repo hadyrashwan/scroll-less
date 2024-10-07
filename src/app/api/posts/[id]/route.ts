@@ -2,7 +2,7 @@ import { db, posts } from "@/schema";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server.js";
 
-export const GET = async function GET(_: { method: string; }, options: { params: {id: string}}): Promise<Response> {
+export const GET = async function GET(req:Request , options: { params: {id: string}}): Promise<Response> {
 
 
   const { params } = options;
