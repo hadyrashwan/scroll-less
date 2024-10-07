@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "migration:generate": "drizzle-kit generate",
-    "migration:push": "drizzle-kit migrate"
+    "migration:push": "drizzle-kit migrate",
+    "test": "vitest --watch",
+    "test:ci": "vitest --ci"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.5.0",
@@ -22,14 +24,23 @@
     "react-twitter-embed": "^4.0.4"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.5.0",
+    "@testing-library/react": "^16.0.1",
+    "@types/jest": "^29.5.13",
     "@types/node": "^20",
-    "@types/react": "^18",
+    "@types/react": "^18.3.11",
     "@types/react-dom": "^18",
+    "@vitejs/plugin-react": "^4.3.2",
     "drizzle-kit": "^0.24.2",
     "eslint": "^8",
     "eslint-config-next": "14.2.13",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "node-mocks-http": "^1.16.1",
     "postcss": "^8",
+    "supertest": "^7.0.0",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^2.1.2"
   }
 }
