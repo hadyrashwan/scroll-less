@@ -1,10 +1,11 @@
-import { auth } from "@/auth";
 import { db, posts } from "@/schema";
 import { eq } from "drizzle-orm";
-import { NextResponse } from "next/server";
+import { NextResponse } from "next/server.js";
 
-export const GET = auth(async function GET(req, { params }) {
+export const GET = async function GET(_: { method: string; }, options: { params: {id: string}}): Promise<Response> {
 
+
+  const { params } = options;
   const { id } = params as { id: string};
 
   try {
@@ -23,4 +24,4 @@ export const GET = auth(async function GET(req, { params }) {
     console.log(error);
     return NextResponse.json({ error: "Database error" }, { status: 500 });
   }
-});
+};

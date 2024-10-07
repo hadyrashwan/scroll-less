@@ -1,6 +1,7 @@
-import { GET } from './route'; // Import the GET handler
+import { GET } from '@/app/api/posts/[id]/route'; // Import the GET handler
 import { db } from '@/schema';
 import { vi, describe, it, expect, afterEach } from 'vitest';
+import { NextResponse } from 'next/server'; // Import the NextResponse type
 
 // Mock the Next.js NextResponse object
 vi.mock('next/server', () => ({
@@ -15,10 +16,29 @@ vi.mock('next/server', () => ({
 // Mock the database schema
 vi.mock('@/schema', () => ({
   db: {
-    select: vi.fn(),
+    select: vi.fn(), // Mock db.select directly
   },
   posts: { id: 'posts.id' },
 }));
+
+// Define types for the request and response
+type MockRequest = {
+  method: string;
+};
+
+type MockResponse = {
+  status: number;
+  json: () => Promise<any>;
+};
+
+// Define a mock type for the query builder
+type QueryBuilder = {
+  from: (table: string) => {
+    where: (condition: any) => {
+      limit: (limit: number) => Promise<any[]>;
+    };
+  };
+};
 
 describe('GET /api/posts/[id]', () => {
   afterEach(() => {
@@ -30,18 +50,18 @@ describe('GET /api/posts/[id]', () => {
     const mockPost = [{ id: postId, title: 'Test Post', content: 'This is a test post.' }];
 
     // Mock the database query chain
-    (db.select as any).mockReturnValueOnce({
+    (db.select as typeof vi.fn).mockReturnValueOnce({
       from: vi.fn().mockReturnValue({
         where: vi.fn().mockReturnValue({
           limit: vi.fn().mockResolvedValueOnce(mockPost),
         }),
       }),
-    });
+    } as QueryBuilder); // Cast the return type to QueryBuilder
 
-    const req = { method: 'GET' } as any; // Simulate request object
+    const req: MockRequest = { method: 'GET' }; // Simulate request object
     const params = { id: postId }; // Simulate params
 
-    const response = await GET(req, { params });
+    const response: MockResponse = await GET(req, { params });
 
     // Validate the mocked NextResponse object for correct behavior
     expect(response.status).toBe(200);
@@ -54,18 +74,18 @@ describe('GET /api/posts/[id]', () => {
     const postId = '1';
 
     // Simulate a database error
-    (db.select as vi.Mock).mockReturnValueOnce({
+    (db.select as typeof vi.fn).mockReturnValueOnce({
       from: vi.fn().mockReturnValue({
         where: vi.fn().mockReturnValue({
           limit: vi.fn().mockRejectedValueOnce(new Error('Database error')),
         }),
       }),
-    });
+    } as QueryBuilder); // Cast the return type to QueryBuilder
 
-    const req = { method: 'GET' } as any;
+    const req: MockRequest = { method: 'GET' }; // Simulate request object
     const params = { id: postId }; // Simulate params
 
-    const response = await GET(req, { params });
+    const response: MockResponse = await GET(req, { params });
 
     // Validate the mocked NextResponse object for error response
     expect(response.status).toBe(500);

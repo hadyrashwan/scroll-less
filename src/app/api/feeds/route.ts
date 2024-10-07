@@ -1,7 +1,7 @@
 import { auth } from "@/auth"
 import { db, feeds } from "@/schema";
 import { eq } from 'drizzle-orm';
-import { NextResponse } from "next/server"
+import { NextResponse } from "next/server.js"
  
 export const GET = auth( async function GET(req) {
 
