@@ -9,7 +9,8 @@
     "lint": "next lint",
     "migration:generate": "drizzle-kit generate",
     "migration:push": "drizzle-kit migrate",
-    "test": "vitest --watch",
+    "test": "vitest run",
+    "test:watch": "vitest --watch",
     "test:ci": "vitest run"
   },
   "dependencies": {

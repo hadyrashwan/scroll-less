@@ -46,13 +46,18 @@ This is a Next.js application that allow users to create there own rss feeds.
 
 6. Open your browser and navigate to `http://localhost:3000`.
 
+## Running Tests
+```
+npm run test
+```
+
 ## Features
 
 - User authentication (sign in, sign out)
 - Create your own feed
 - Add posts to your feed from various sources
 - Expose as RSS feed
-- Auth sync RSS feeds.
+- Auto sync RSS feeds.
 
 ## Environment Variables
 
