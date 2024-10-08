@@ -10,7 +10,7 @@
     "migration:generate": "drizzle-kit generate",
     "migration:push": "drizzle-kit migrate",
     "test": "vitest --watch",
-    "test:ci": "vitest --ci"
+    "test:ci": "vitest run"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.5.0",

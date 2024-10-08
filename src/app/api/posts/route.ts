@@ -25,7 +25,6 @@ export const GET = auth(async function GET(req) {
 });
 
 export const POST = auth(async function POST(req) {
-  console.log(req.auth);
   if (!req.auth)
     return NextResponse.json({ message: "Not authenticated" }, { status: 401 });
 
