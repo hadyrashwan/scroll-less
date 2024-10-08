@@ -2,6 +2,10 @@ import { db, posts } from "@/schema";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server.js";
 
+import { logger } from "@/lib/logger";
+const log = logger.child({ module: "posts" });
+
+
 export const GET = async function GET(req:Request , options: { params: {id: string}}): Promise<Response> {
 
 
@@ -21,7 +25,7 @@ export const GET = async function GET(req:Request , options: { params: {id: stri
       body: { posts: posts_found },
     });
   } catch (error) {
-    console.log(error);
+    log.error(error);
     return NextResponse.json({ error: "Database error" }, { status: 500 });
   }
 };

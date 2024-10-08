@@ -10,8 +10,6 @@ const FeedPage = () => {
   const [loading, setLoading] = useState(true);  
   const [error, setError] = useState<string | null>(null); // Updated the type
   
-  console.log('feed_in');
-
   useEffect(() => {
     const fetchFeed = async () => {
       try {

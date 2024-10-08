@@ -3,6 +3,9 @@ import { db, feeds, posts } from "@/schema";
 import { eq, and } from "drizzle-orm";
 import { NextResponse } from "next/server.js";
 
+import { logger } from "@/lib/logger";
+const log = logger.child({ module: "posts" });
+
 export const GET = auth(async function GET(req) {
   if (!req.auth)
     return NextResponse.json({ message: "Not authenticated" }, { status: 401 });
@@ -19,7 +22,7 @@ export const GET = auth(async function GET(req) {
 
     return NextResponse.json({ success: true, body: { feeds: response } });
   } catch (error) {
-    console.log(error);
+    log.error(error);
     return NextResponse.json({ error: "Database error" }, { status: 500 });
   }
 });
@@ -52,7 +55,7 @@ export const POST = auth(async function POST(req) {
     
     return NextResponse.json({ success: true, body: { posts: [values] } });
   } catch (error) {
-    console.log(error)
+    log.error(error);
     return NextResponse.json({ error: "Database error" }, { status: 500 });
   }
 });
