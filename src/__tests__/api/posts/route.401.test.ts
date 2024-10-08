@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { db, posts } from "@/schema";
 import { GET, POST } from "@/app/api/posts/route"; // Update with your actual route path
 import { vi, describe, it, expect } from "vitest";
 import { NextRequest } from "next/server";
 
 vi.mock("@/auth", () => ({
-  auth: (handler:any) => async (req:any, isAuthicated = true) => {
+  auth: (handler:any) => async (req:any) => {
    return handler(req);
   },
 }));
