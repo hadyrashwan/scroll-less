@@ -69,10 +69,14 @@ const getRssFeed = (payload:{feed: Feed,posts: Post[], host: string}):string => 
               id: post.id,
               link: `${host}/posts/${post.id}`,
               date: new Date(post.created_at as number),
-              description: 'this is a test post',
-              content: `This is the content of 
-              scroll less link: https://${host}/posts/${post.id}
-              original link: ${post.url},  `
+              description: `
+            <div>
+                <h2> Post from ${feed.name} </h2>
+                <p>No description available for this type of post</p>
+                <p>Scroll less link: <a href="https://${host}/posts/${post.id}">Read more</a></p>
+                <p>Original link: <a href="${post.url}">View original</a></p>
+            </div>
+        `
             });
           }
 
