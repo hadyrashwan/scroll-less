@@ -71,7 +71,7 @@ const getRssFeed = (payload:{feed: Feed,posts: Post[], host: string}):string => 
               date: new Date(post.created_at as number),
               description: 'this is a test post',
               content: `This is the content of 
-              scroll less link: ${host}/posts/${post.id}
+              scroll less link: https://${host}/posts/${post.id}
               original link: ${post.url},  `
             });
           }
