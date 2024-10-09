@@ -59,6 +59,7 @@ export const posts = sqliteTable('posts', {
   created_at: integer('created_at').$defaultFn(() => Date.now()),
 });
 
+
 // {enum:['FACEBOOK','INSTAGRAM','YOUTUBE','TWITTER','TIKTOK','REDDIT', 'TELEGRAM','LINKEDIN']}
 export const autosyncFeeds = sqliteTable('autosync', {
   id: integer('id').primaryKey(),
