@@ -59,7 +59,7 @@ const FeedPage = () => {
         </h2>
         <p className="text-gray-700">Name: {feed?.name}</p>
         <p className="text-gray-700">Description: {feed?.description}</p>
-        {/* <RssFeedCopyButton rssUrl={`${window.location.origin}/api/feeds/${id}/rss`}></RssFeedCopyButton> */}
+        <RssFeedCopyButton rssUrl={`${window.location.origin}/api/feeds/${id}/rss`}></RssFeedCopyButton>
         <div className="mt-4 flex justify-center">
     </div>
         <p>
