@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import DynamicWidget from "@/components/dynamic-feed-widget";
 import Link from "next/link";
+import RssFeedCopyButton from "@/components/rss-button";
 
 const FeedPage = () => {
   const { id } = useParams();
@@ -58,15 +59,8 @@ const FeedPage = () => {
         </h2>
         <p className="text-gray-700">Name: {feed?.name}</p>
         <p className="text-gray-700">Description: {feed?.description}</p>
+        {/* <RssFeedCopyButton rssUrl={`${window.location.origin}/api/feeds/${id}/rss`}></RssFeedCopyButton> */}
         <div className="mt-4 flex justify-center">
-      <a
-        href={`/api/feeds/${id}/rss`}
-        className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        RSS Feed
-      </a>
     </div>
         <p>
           <Link

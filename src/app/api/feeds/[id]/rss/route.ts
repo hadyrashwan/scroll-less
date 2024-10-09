@@ -73,8 +73,8 @@ const getRssFeed = (payload:{feed: Feed,posts: Post[], host: string}):string => 
             <div>
                 <h2> Post from ${feed.name} </h2>
                 <p>No description available for this type of post</p>
-                <p>Scroll less link: <a href="https://${host}/posts/${post.id}">Read more</a></p>
-                <p>Original link: <a href="${post.url}">View original</a></p>
+                <p>Scroll less link: <a href="https://${host}/posts/${post.id}">Open Post fetched</a></p>
+                <p>Original link: <a href="${post.url}">Open Post on source</a></p>
             </div>
         `
             });
