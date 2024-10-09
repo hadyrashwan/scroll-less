@@ -1,12 +1,12 @@
 "use client";
 
-import FacebookWidget from './facebook-widget';
 import TelegramWidget from './telegram-widget';
 import InstagramWidget from './instgram-widget';
 import TwitterWidget from './twitter-widget';
 import TikTokWidget from './tiktok-widget';
 import YoutubeWidget from './video-player';
 import RedditWidget from './redit-widget';
+import { FacebookEmbed } from 'react-social-media-embed';
 
 type Widget = {
   type: string;
@@ -17,7 +17,7 @@ const DynamicWidget = ({ type, url }:Widget) => {
   // Determine which widget to render based on the type
   switch (type) {
     case 'FACEBOOK':
-      return <FacebookWidget url={url} />;            
+      return <FacebookEmbed url={url} />;            
     case 'INSTAGRAM':
       return <InstagramWidget url={url} />;
     case 'TWITTER':
