@@ -58,6 +58,16 @@ const FeedPage = () => {
         </h2>
         <p className="text-gray-700">Name: {feed?.name}</p>
         <p className="text-gray-700">Description: {feed?.description}</p>
+        <div className="mt-4 flex justify-center">
+      <a
+        href={`/api/feeds/${id}/rss`}
+        className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        RSS Feed
+      </a>
+    </div>
         <p>
           <Link
             href="/profile"
@@ -65,6 +75,7 @@ const FeedPage = () => {
           >
             Go back to Profile
           </Link>
+
         </p>
         <h3 className="text-xl font-semibold mt-6">Posts</h3>
         {posts.length > 0 ? (
