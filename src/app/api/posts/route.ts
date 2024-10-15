@@ -2,7 +2,8 @@ import { auth } from "@/auth";
 import { db, feeds, posts } from "@/schema";
 import { eq, and } from "drizzle-orm";
 import { NextResponse } from "next/server.js";
-import scrapeMetadata from "metadata-scraper"; // Importing the library
+import ogs from 'open-graph-scraper';
+
 
 import { logger } from "@/lib/logger";
 const log = logger.child({ module: "posts" });
@@ -48,16 +49,27 @@ export const POST = auth(async function POST(req) {
       );
     }
 
-    const metadata = await scrapeMetadata(url);
+    const options = {
+      url,
+      timeout: 5000, // Optional: set a timeout for the request
+      followRedirect: true, // Optional: follow redirects
+    };
+
+    const { error, response, result } = await ogs(options);
+
+    if (error) {
+      throw new Error(`Failed to fetch metadata ${response}`);
+    }
+
 
     const values = {
       id: crypto.randomUUID(),
       feedId,
       url,
       type,
-      title: metadata.title || "",
-      description: metadata.description || "",
-      image: metadata.image || "",
+      title: result.ogTitle || "",
+      description: result.ogDescription || "",
+      image: result.ogImage?.length ? result.ogImage[0].url : "",
     };
 
     await db.insert(posts).values(values);
