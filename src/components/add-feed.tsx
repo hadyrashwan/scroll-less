@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 
-import { logger } from '@/lib/logger';
-const log = logger.child({ module: "profile" , isClient: true});
+// import { logger } from '@/lib/logger';
+// const log = logger.child({ module: "profile" , isClient: true});
 
 
 const SaveFeed = () => {
@@ -37,7 +37,7 @@ const SaveFeed = () => {
         setError(data.error || "Something went wrong.");
       }
     } catch (err) {
-      log.error(err)
+      console.error(err)
       setError("Failed to save the feed.");
     } finally {
       setLoading(false);

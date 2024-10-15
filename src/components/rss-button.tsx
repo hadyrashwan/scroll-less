@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { logger } from '@/lib/logger';
-const log = logger.child({ module: "rss-button", isClient: true });
+// import { logger } from '@/lib/logger';
+// const log = logger.child({ module: "rss-button", isClient: true });
 
 const RssFeedCopyButton = ({ rssUrl,size = 24, color = "#FFA500"  }: { rssUrl: string, size?: number , color?: string }) => {
   const [copySuccess, setCopySuccess] = useState(false);
@@ -10,7 +10,7 @@ const RssFeedCopyButton = ({ rssUrl,size = 24, color = "#FFA500"  }: { rssUrl: s
       await navigator.clipboard.writeText(rssUrl);
       setCopySuccess(true);
     } catch (err) {
-      log.error(err);
+      console.error(err);
       setCopySuccess(false);
     }
 

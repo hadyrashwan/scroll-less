@@ -2,8 +2,8 @@ import { db, feeds, posts } from "@/schema";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server.js";
 
-import { logger } from "@/lib/logger";
-const log = logger.child({ module: "feeds" });
+// import { logger } from "@/lib/logger";
+// const log = logger.child({ module: "feeds" });
 
 
 export const GET =  async function (req:Request, options: { params: {id: string}})  {
@@ -30,7 +30,7 @@ export const GET =  async function (req:Request, options: { params: {id: string}
       body: { feed, posts: posts_found },
     });
   } catch (error) {
-    log.error(error);
+    console.error(error);
     return NextResponse.json({ error: "Database error" }, { status: 500 });
   }
 };

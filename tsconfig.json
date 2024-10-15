@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/auth.ts", "src/xxxaas.middleware.tsllll"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/auth.ts", "src/xxxaas.middleware.tsllll", "src/instrumentation.js"],
   "exclude": ["node_modules"]
 }

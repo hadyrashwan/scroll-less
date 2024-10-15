@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from 'react';
 
-import { logger } from '@/lib/logger';
-const log = logger.child({ module: "profile" , isClient: true});
+// import { logger } from '@/lib/logger';
+// const log = logger.child({ module: "profile" , isClient: true});
 
 
 const UrlPostForm = () => {
@@ -24,7 +24,7 @@ const UrlPostForm = () => {
         setFeeds(data.body.feeds.map((feed: { id: string, name:string }) => feed));
       })
       .catch((error) => {
-        log.error('Error fetching feeds:', error);
+        console.error('Error fetching feeds:', error);
       });
   }, []);
 

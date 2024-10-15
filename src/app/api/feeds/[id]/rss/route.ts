@@ -9,8 +9,8 @@ type Feed = InferSelectModel<typeof feeds>;
 
 
 
-import { logger } from "@/lib/logger";
-const log = logger.child({ module: "feeds" });
+// import { logger } from "@/lib/logger";
+// const log = logger.child({ module: "feeds" });
 
 
 export const GET =  async function (req:Request, options: { params: {id: string}})  {
@@ -45,7 +45,7 @@ export const GET =  async function (req:Request, options: { params: {id: string}
       });
 
   } catch (error) {
-    log.error(error);
+    console.error(error);
     return NextResponse.json({ error: "Database error" }, { status: 500 });
   }
 };
