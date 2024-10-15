@@ -55,6 +55,9 @@ export const posts = sqliteTable('posts', {
   id: text('id').primaryKey(),
   feedId: text('feedId').notNull().references(() => feeds.id, { onDelete: "cascade" }),
   url: text('url').notNull(),
+  title: text('title').notNull(),
+  description: text('description').notNull(),
+  image: text('image').notNull(),
   type: text('type').notNull(),
   created_at: integer('created_at').$defaultFn(() => Date.now()),
 });

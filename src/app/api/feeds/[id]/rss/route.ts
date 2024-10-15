@@ -65,14 +65,15 @@ const getRssFeed = (payload:{feed: Feed,posts: Post[], host: string}):string => 
           // Add posts to the feed
           for (const post of posts) {
             rssFeed.addItem({
-              title: post.id,
+              title: post.title,
+              image: post.image,
               id: post.id,
               link: `${host}/posts/${post.id}`,
               date: new Date(post.created_at as number),
               description: `
             <div>
-                <h2> Post from ${feed.name} </h2>
-                <p>No description available for this type of post</p>
+                <h2> ${ post.title} </h2>
+                <p> ${post.description} </p>
                 <p>Scroll less link: <a href="https://${host}/posts/${post.id}">Open Post fetched</a></p>
                 <p>Original link: <a href="${post.url}">Open Post on source</a></p>
             </div>

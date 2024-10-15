@@ -21,7 +21,21 @@
       "version": "6",
       "when": 1727880791719,
       "tag": "0002_shiny_daimon_hellstrom",
-      "breakpoints": false
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1728989032280,
+      "tag": "0003_nasty_mysterio",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1728989457768,
+      "tag": "0004_sloppy_boomerang",
+      "breakpoints": true
     }
   ]
 }

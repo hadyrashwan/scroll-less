@@ -2,6 +2,7 @@ import { auth } from "@/auth";
 import { db, feeds, posts } from "@/schema";
 import { eq, and } from "drizzle-orm";
 import { NextResponse } from "next/server.js";
+import scrapeMetadata from "metadata-scraper"; // Importing the library
 
 import { logger } from "@/lib/logger";
 const log = logger.child({ module: "posts" });
@@ -47,12 +48,20 @@ export const POST = auth(async function POST(req) {
       );
     }
 
-    const values = { id: crypto.randomUUID(), feedId, url, type };
+    const metadata = await scrapeMetadata(url);
+
+    const values = {
+      id: crypto.randomUUID(),
+      feedId,
+      url,
+      type,
+      title: metadata.title || "",
+      description: metadata.description || "",
+      image: metadata.image || "",
+    };
 
     await db.insert(posts).values(values);
 
-
-    
     return NextResponse.json({ success: true, body: { posts: [values] } });
   } catch (error) {
     log.error(error);
