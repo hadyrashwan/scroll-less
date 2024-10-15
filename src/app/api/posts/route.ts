@@ -76,7 +76,7 @@ export const POST = auth(async function POST(req) {
 
     return NextResponse.json({ success: true, body: { posts: [values] } });
   } catch (error) {
-    log.error(error);
+    console.error(error);
     return NextResponse.json({ error: "Database error" }, { status: 500 });
   }
 });
