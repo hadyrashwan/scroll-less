@@ -61,18 +61,6 @@ describe("API Endpoints", () => {
       expect(data).toEqual({ success: true, body: { feeds: mockPosts } });
     });
 
-    // it("should return 401 if not authenticated", async () => {
-    //   const unauthenticatedReq = {
-    //     nextUrl: { searchParams: new URLSearchParams({ feedId: "1" }) },
-    //     auth: null,
-    //   } as Request;
-
-    //   const response = await GET(unauthenticatedReq);
-
-    //   expect(response.status).toBe(401);
-    //   const data = await response.json();
-    //   expect(data).toEqual({ message: "Not authenticated" });
-    // });
   });
 
   describe("POST /api/your-route", () => {
@@ -86,7 +74,7 @@ describe("API Endpoints", () => {
         }),
       });
 
-      const expectedValues = { id: expect.any(String), feedId: "1", url: "http://example.com", type: "article" };
+      const expectedValues = { id: expect.any(String), feedId: "1", url: "http://example.com", type: "article", description:"" , image:"", title:"Example Domain"};
 
       // Mock database insert
       (db.insert as any).mockReturnValueOnce({
@@ -101,22 +89,6 @@ describe("API Endpoints", () => {
       expect(db.insert).toHaveBeenCalledWith(posts); // Check insert called with posts
     });
 
-    // it("should return 401 if not authenticated", async () => {
-
-
-
-    //   const unauthenticatedReq = {
-    //     nextUrl: { searchParams: new URLSearchParams({ feedId: "1" }) },
-    //     json: vi.fn(),
-    //     auth: undefined,
-    //   } as Request;
-
-    //   const response = await POST(unauthenticatedReq);
-
-    //   expect(response.status).toBe(401);
-    //   const data = await response.json();
-    //   expect(data).toEqual({ message: "Not authenticated" });
-    // });
 
     it("should return 404 if feed not found", async () => {
       const mockFeedId = "2"; // Non-existent feed ID

@@ -61,7 +61,7 @@ describe('GET /api/posts/[id]', () => {
     const req: MockRequest = { method: 'GET' }; // Simulate request object
     const params = { id: postId }; // Simulate params
 
-    const response: MockResponse = await GET(req, { params });
+    const response: MockResponse = await GET(req as any, { params });
 
     // Validate the mocked NextResponse object for correct behavior
     expect(response.status).toBe(200);
@@ -85,7 +85,7 @@ describe('GET /api/posts/[id]', () => {
     const req: MockRequest = { method: 'GET' }; // Simulate request object
     const params = { id: postId }; // Simulate params
 
-    const response: MockResponse = await GET(req, { params });
+    const response: MockResponse = await GET(req as any, { params });
 
     // Validate the mocked NextResponse object for error response
     expect(response.status).toBe(500);
