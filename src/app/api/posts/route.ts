@@ -3,7 +3,9 @@ import { db, feeds, posts } from "@/schema";
 import { eq, and } from "drizzle-orm";
 import { NextResponse } from "next/server.js";
 import ogs from 'open-graph-scraper';
+import { OgObject } from "open-graph-scraper/types";
 
+const OG_RETRY = 5
 
 // import { logger } from "@/lib/logger";
 // const log = logger.child({ module: "posts" });
@@ -49,18 +51,7 @@ export const POST = auth(async function POST(req) {
       );
     }
 
-    const options = {
-      url,
-      timeout: 5000, // Optional: set a timeout for the request
-      followRedirect: true, // Optional: follow redirects
-    };
-
-    const { error, response, result } = await ogs(options);
-
-    if (error) {
-      throw new Error(`Failed to fetch metadata ${response}`);
-    }
-
+     const result = await fetchOGData(url,OG_RETRY)
 
     const values = {
       id: crypto.randomUUID(),
@@ -80,3 +71,42 @@ export const POST = auth(async function POST(req) {
     return NextResponse.json({ error: "Database error" }, { status: 500 });
   }
 });
+
+async function fetchOGData(url: string, maxRetries: number = 10): Promise<OgObject> {
+  let attempt = 0;
+
+  while (attempt < maxRetries) {
+    let result: OgObject = {};
+    try {
+      const options = {
+        url,
+        timeout: 5000,
+        followRedirect: true,
+      };
+
+      const { error, response, result: ogResult } = await ogs(options);
+
+      if (error) {
+        throw new Error(`Failed to fetch metadata ${response}`);
+      }
+
+      result = ogResult;
+
+      if (ogResult.ogImage?.length) {
+        return ogResult;
+      }
+    } catch (err) {
+      console.error(`Error on attempt ${attempt + 1}: ${err}`);
+    }
+
+    attempt++;
+
+    if (attempt < maxRetries) {
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second before retrying
+    } else {
+      return result
+    }
+  }
+
+  return {}; // Ensure a return statement in case the loop exits unexpectedly
+}
