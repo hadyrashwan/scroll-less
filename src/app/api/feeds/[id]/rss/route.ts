@@ -42,7 +42,7 @@ export const GET =  async function (req:Request, options: { params: {id: string}
   }
 };
 
-export const getRssFeed = (payload:{feed: Feed,posts: Post[], host: string}):string => {
+const getRssFeed = (payload:{feed: Feed,posts: Post[], host: string}):string => {
 
         const { feed , posts, host} = payload
         // Create a new Feed instance
