@@ -80,7 +80,7 @@ async function fetchOGData(url: string, maxRetries: number = 10): Promise<OgObje
     try {
       const options = {
         url,
-        timeout: 5000,
+        timeout: 1000,
         followRedirect: true,
       };
 
@@ -94,6 +94,8 @@ async function fetchOGData(url: string, maxRetries: number = 10): Promise<OgObje
 
       if (ogResult.ogImage?.length) {
         return ogResult;
+      }else{
+        console.log(`attempt ${attempt}, ${JSON.stringify(ogResult)}  `)
       }
     } catch (err) {
       console.error(`Error on attempt ${attempt + 1}: ${err}`);
