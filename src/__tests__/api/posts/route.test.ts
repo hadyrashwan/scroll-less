@@ -5,13 +5,15 @@ import { vi, describe, it, expect } from "vitest";
 import { NextRequest } from "next/server";
 
 vi.mock("@/auth", () => ({
-  auth: (handler:any) => async (req:any, isAuthicated = true) => {
-    req.auth = { user: { id: "testUserId" } }; // Mock authenticated user
-    if(!isAuthicated){
+  auth:
+    (handler: any) =>
+    async (req: any, isAuthicated = true) => {
+      req.auth = { user: { id: "testUserId" } }; // Mock authenticated user
+      if (!isAuthicated) {
         delete req.auth;
-    }
-    return handler(req);
-  },
+      }
+      return handler(req);
+    },
 }));
 
 vi.mock("@/schema", () => ({
@@ -20,20 +22,19 @@ vi.mock("@/schema", () => ({
     insert: vi.fn(),
   },
   feeds: {
-    id: 'id',
-    userId: 'userId',
+    id: "id",
+    userId: "userId",
   },
   posts: {
-    feedId: 'feedId',
+    feedId: "feedId",
   },
 }));
 
 const mockOptions = {
-    params: {
-      id: "123" // Example ID
-    }
-  };
-  
+  params: {
+    id: "123", // Example ID
+  },
+};
 
 describe("API Endpoints", () => {
   const mockReqGet = {
@@ -41,26 +42,31 @@ describe("API Endpoints", () => {
   } as NextRequest;
 
   const mockReqPost = {
-    json: vi.fn().mockResolvedValue({ feedId: "1", url: "http://example.com", type: "article" }),
+    json: vi
+      .fn()
+      .mockResolvedValue({
+        feedId: "1",
+        url: "https://giphy.com/",
+        type: "article",
+      }),
   } as unknown as NextRequest;
 
   describe("GET /api/your-route", () => {
     it("should return posts if authenticated", async () => {
       const mockPosts = [{ id: "1", feedId: "1", content: "Test Post" }];
 
-        (db.select  as any).mockReturnValueOnce({
+      (db.select as any).mockReturnValueOnce({
         from: vi.fn().mockReturnValueOnce({
           where: vi.fn().mockReturnValueOnce(mockPosts),
         }),
       });
 
-      const response = (await GET(mockReqGet,mockOptions)) as Response ;
+      const response = (await GET(mockReqGet, mockOptions)) as Response;
 
       expect(response.status).toBe(200);
       const data = await response.json();
       expect(data).toEqual({ success: true, body: { feeds: mockPosts } });
     });
-
   });
 
   describe("POST /api/your-route", () => {
@@ -68,39 +74,59 @@ describe("API Endpoints", () => {
       const mockFeed = [{ id: "1", userId: "testUserId" }];
 
       // Mock database response for feed check
-      (db.select  as any).mockReturnValueOnce({
+      (db.select as any).mockReturnValueOnce({
         from: vi.fn().mockReturnValueOnce({
           where: vi.fn().mockReturnValueOnce(mockFeed),
         }),
       });
 
-      const expectedValues = { id: expect.any(String), feedId: "1", url: "http://example.com", type: "article", description:"" , image:"", title:"Example Domain"};
+      const expectedValues = {
+        id: expect.any(String),
+        feedId: "1",
+        url: "https://giphy.com/",
+        type: "article",
+        description:
+          "GIPHY is the platform that animates your world. Find the GIFs, Clips, and Stickers                             that make your conversations more positive, more expressive, and more you.",
+        image: "https://giphy.com/static/img/giphy-be-animated-logo.gif",
+        title: "GIPHY - Be Animated",
+      };
 
       // Mock database insert
       (db.insert as any).mockReturnValueOnce({
         values: vi.fn().mockResolvedValueOnce(undefined),
       });
 
-      const response: Response = ( await POST(mockReqPost,mockOptions) ) as Response;
+      const response: Response = (await POST(
+        mockReqPost,
+        mockOptions
+      )) as Response;
 
       expect(response.status).toBe(200);
       const data = await response.json();
-      expect(data).toEqual({ success: true, body: { posts: [expectedValues] } });
+      expect(data).toEqual({
+        success: true,
+        body: { posts: [expectedValues] },
+      });
       expect(db.insert).toHaveBeenCalledWith(posts); // Check insert called with posts
     });
 
-
     it("should return 404 if feed not found", async () => {
       const mockFeedId = "2"; // Non-existent feed ID
-      mockReqPost.json = vi.fn().mockResolvedValue({ feedId: mockFeedId, url: "http://example.com", type: "article" });
+      mockReqPost.json = vi
+        .fn()
+        .mockResolvedValue({
+          feedId: mockFeedId,
+          url: "http://giphy.com/",
+          type: "article",
+        });
 
-      (db.select  as any).mockReturnValueOnce({
+      (db.select as any).mockReturnValueOnce({
         from: vi.fn().mockReturnValueOnce({
           where: vi.fn().mockReturnValueOnce([]), // No feed found
         }),
       });
 
-      const response =  (await POST(mockReqPost,mockOptions)) as Response;
+      const response = (await POST(mockReqPost, mockOptions)) as Response;
 
       expect(response.status).toBe(404);
       const data = await response.json();
@@ -108,9 +134,15 @@ describe("API Endpoints", () => {
     });
 
     it("should return 500 for database errors", async () => {
-      mockReqPost.json = vi.fn().mockResolvedValue({ feedId: "1", url: "http://example.com", type: "article" });
+      mockReqPost.json = vi
+        .fn()
+        .mockResolvedValue({
+          feedId: "1",
+          url: "http://giphy.com/",
+          type: "article",
+        });
 
-      (db.select  as any).mockImplementationOnce(() => {
+      (db.select as any).mockImplementationOnce(() => {
         throw new Error("Database error");
       });
 
