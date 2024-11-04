@@ -39,6 +39,10 @@ export const POST = auth(async function POST(req) {
 
   const userId = req.auth?.user?.id || "";
 
+  req.headers.forEach( (h) => {
+    console.log('request headers:', h )
+  })
+
   try {
     const feedsFound = await db
       .select()
@@ -83,6 +87,14 @@ async function fetchOGData(url: string, maxRetries: number = 10): Promise<OgObje
         timeout: 1000,
         followRedirect: true,
       };
+
+      const fetchResponse = await fetch(url);
+      const bodyText = await fetchResponse.text()
+      fetchResponse.headers.forEach( (h) => {
+        console.log('response headers:', h )
+      })
+    
+      console.log('is_body_title_right_?',bodyText.includes('name="title" content="Create'))
 
       const { error, response, result: ogResult } = await ogs(options);
 
