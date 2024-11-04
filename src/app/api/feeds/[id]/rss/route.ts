@@ -7,12 +7,6 @@ type Post = InferSelectModel<typeof posts>;
 type Feed = InferSelectModel<typeof feeds>;
 
 
-
-
-// import { logger } from "@/lib/logger";
-// const log = logger.child({ module: "feeds" });
-
-
 export const GET =  async function (req:Request, options: { params: {id: string}})  {
 
   const { params } = options;
@@ -34,9 +28,7 @@ export const GET =  async function (req:Request, options: { params: {id: string}
       .from(posts)
       .where(eq(posts.feedId, id));
 
-
     const rss = getRssFeed({feed,posts:posts_found, host: req.headers.get('host')  || 'me.xyz' })
-
 
     return new NextResponse(rss, {
         headers: {
@@ -50,7 +42,7 @@ export const GET =  async function (req:Request, options: { params: {id: string}
   }
 };
 
-const getRssFeed = (payload:{feed: Feed,posts: Post[], host: string}):string => {
+export const getRssFeed = (payload:{feed: Feed,posts: Post[], host: string}):string => {
 
         const { feed , posts, host} = payload
         // Create a new Feed instance
@@ -62,6 +54,7 @@ const getRssFeed = (payload:{feed: Feed,posts: Post[], host: string}):string => 
             copyright: 'All rights reserved',
           });
       
+
           // Add posts to the feed
           for (const post of posts) {
             rssFeed.addItem({
